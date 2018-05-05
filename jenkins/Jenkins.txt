@@ -1,0 +1,17 @@
+Jenkins: is continous build and integration tool
+================================
+Jenkins is plateform independent (windows, linux, mac )
+
+
+1. Install Jenkins
+2. Login with Initial password 
+		http://localhost:8080
+
+ path of initial password: 
+				C:\Program Files (x86)\Jenkins\secrets\initialAdminPassword
+
+
+3. Install Suggest Plugins or Required Plugins
+
+
+

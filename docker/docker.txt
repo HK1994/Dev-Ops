@@ -1,0 +1,143 @@
+Docker 
+
+Docker – Installation 
+Docker – Terms 
+Docker – Container 
+Docker – Images 
+Docker – Registry 
+Docker – Hub 
+Docker – Jenkins Image in Docker container
+component of docker :
+______________________________________________________________________________________________
+•	Docker Engine - It is used for building Docker images and creating Docker containers.
+•	Docker Hub - This is the registry which is used to host various Docker images.
+•	Docker Compose - This is used to define applications using multiple Docker containers.
+________________________________________________________________________________________________
+
+in centos:
+
+#yum install docker-ce 
+
+
+
+To see the version of Docker running, you can issue the following command -
+___________________________________________________________________________
+# docker version 
+
+
+To see more information on the Docker running on the system, you can issue the following command-
+__________________________________________________________________________________________________
+
+# docker info
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+docker import and export 
+___________________________________________________________________________________
+_metod 1:-__________________________________________________________________________________
+
+export (image in to tar file and load other system and run image)
+__________________________________________________________________
+
+#docker save -o path/filename.tar imagenme 
+
+send to other system by ftp 
+.......................................................
+# scp -r abcd(folder name) ansible@192.168.92.63:/home/ansible
+
+..............................................
+#docker  load -i /home/ansible/abcd/test.tar
+
+go to path 
+
+#docker load -i test.tar
+
+
+
+Metod :- 2
+______________________________________________________________________________________
+docker import and export commands   (export container and run .gz file)
+____________________________________________________________________________________
+Docker  export command  
+...........................
+
+[root@localhost /]# docker export 2c201d7bb9e2 | gzip > ename.gz
+
+Then check directory 
+....................
+....................
+
+[root@localhost /]# ll
+
+total 194164
+lrwxrwxrwx.   1 root root         7 Jan 22 04:28 bin -> usr/bin
+dr-xr-xr-x.   5 root root      4096 Mar 28 08:29 boot
+drwxr-xr-x.  20 root root      3360 Apr 10 01:14 dev
+-rw-r--r--.   1 root root  47594419 Apr 10 03:05 ename.gz
+drwxr-xr-x. 144 root root     12288 Apr 10 01:38 etc
+
+Docker import command :-
+........................................................
+........................................................
+
+[root@localhost /]# zcat ename.gz | docker import - ename
+sha256:3d6ea5c5f35768bec102d335582a45e4cf5af7fc498cf73a25f56061d7dc7656
+
+Then check docker images  :-
+........................................................
+........................................................
+
+[root@localhost /]# docker images
+REPOSITORY                TAG                 IMAGE ID            CREATED             SIZE
+ename                     latest              3d6ea5c5f357        11 seconds ago      135MB
+latest.tar                latest              73e7e6c62755        17 minutes ago      510MB
+<none>                    <none>              24dd9b180870        About an hour ago   145MB
+custom2                   latest              f6656d43b14c        5 days ago          150MB
+ubuntu                    latest              f975c5035748        4 weeks ago         112MB
+hello-world               latest              f2a91732366c        4 months ago        1.85kB
+
+Docker run docker imported image
+............................................................
+...........................................................
+[root@localhost /]# docker run -i -t ename /bin/bash
+
+
+
+Docker swarm
+_________________
+_________________
+_________________
+
+
+initialiaze as a manager :
+
+# docker swarm init --advertise-addr 192.168.221.128
+
+
+To add a worker to this swarm, run the following command:
+
+    docker swarm join --token SWMTKN-1-5shu0zq0k3yygufvusqwwcd3op2fi2yr6kynk9v2hduxw0ux8f-9js3eov46xfvuah48vh8ro16s 192.168.221.128:2377
+
+To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+
+
+
+
+
+
+
